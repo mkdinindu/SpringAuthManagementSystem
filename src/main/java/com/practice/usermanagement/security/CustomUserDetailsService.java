@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email){
+    public UserDetails loadUserByUsername(String email){ //this function is a override of a function in UserDetails interface spring provides.
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not foun"));
 

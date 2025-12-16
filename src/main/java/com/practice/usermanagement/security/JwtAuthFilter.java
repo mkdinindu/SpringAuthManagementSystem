@@ -23,7 +23,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
-    protected void doFilterInternal(HttpServletRequest request,
+    protected void doFilterInternal(HttpServletRequest request, //function for spring to check every requests header for jwt
                                     HttpServletResponse response,
                                     FilterChain filterChain)
         throws ServletException, IOException{

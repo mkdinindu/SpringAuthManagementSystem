@@ -3,6 +3,7 @@ package com.practice.usermanagement.controller;
 import com.practice.usermanagement.dto.UserResponse;
 import com.practice.usermanagement.dto.UserUpdateRequest;
 import com.practice.usermanagement.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
@@ -27,23 +28,26 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public UserResponse get(@PathVariable Long id){
         return userService.getById(id);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public UserResponse update(@PathVariable Long id, @RequestBody UserUpdateRequest req){
         return userService.update(id, req);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable Long id){
         userService.delete(id);
     }
 
     @GetMapping("/hello")
     @PreAuthorize("isAuthenticated()")
-    public String hello() {
-        return "Hello from UserController! Lets watch a horror movie";
+    public String hello(HttpServletRequest request) {
+        return "Hello from UserController! The session Id is " + request.getSession().getId();
     }
 
 }

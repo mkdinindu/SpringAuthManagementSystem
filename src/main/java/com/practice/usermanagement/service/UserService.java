@@ -23,7 +23,7 @@ public class UserService {
                 .toList();
 
     }
-    public UserResponse getById(Long id){
+    public UserResponse getById(String id){
         return map(userRepository.findById(id).orElseThrow());
     }
 

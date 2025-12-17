@@ -20,15 +20,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email){ //this function is a override of a function in UserDetails interface spring provides.
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not foun"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not foundddddd"));
 
 
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
-                user.getRoles().stream()
-                        .map(r -> new SimpleGrantedAuthority(r.getName()))
-                        .toList()
+                java.util.List.of(new SimpleGrantedAuthority(user.getRole())) //because it says that spring security expects in this format
 
         );
     }

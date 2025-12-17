@@ -1,24 +1,26 @@
 package com.practice.usermanagement.entity;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ManyToAny;
+
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashSet;
 import java.util.Set;
 
-@Document(collation = "users")
+@Document(collection = "users")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
 
-    @Id
 
+    @Id
     private String id;
 
 
@@ -28,8 +30,7 @@ public class User {
     private String password;
 
 
-    @DBRef
-    private Set<Role> roles;
+    private String role = "ROLE_USER";
 
 
 

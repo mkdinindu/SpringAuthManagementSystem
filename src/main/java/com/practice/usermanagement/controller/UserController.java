@@ -29,18 +29,18 @@ public class UserController {
 
     @GetMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
-    public UserResponse get(@PathVariable Long id){
+    public UserResponse get(@PathVariable String id){
         return userService.getById(id);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public UserResponse update(@PathVariable Long id, @RequestBody UserUpdateRequest req){
+    public UserResponse update(@PathVariable String id, @RequestBody UserUpdateRequest req){
         return userService.update(id, req);
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable String id){
         userService.delete(id);
     }
 

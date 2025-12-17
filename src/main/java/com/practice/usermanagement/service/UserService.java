@@ -27,12 +27,13 @@ public class UserService {
         return map(userRepository.findById(id).orElseThrow());
     }
 
-    public UserResponse update(Long id, UserUpdateRequest req){
+    public UserResponse update(String id, UserUpdateRequest req){
+        System.out.println("Updating user with id: " + id);
         User user = userRepository.findById(id).orElseThrow();
         user.setEmail(req.email);
         return map(userRepository.save(user));
     }
-    public void delete(Long id){
+    public void delete(String id){
         userRepository.deleteById(id);
     }
 
@@ -40,10 +41,7 @@ public class UserService {
         UserResponse r = new UserResponse();
         r.id = user.getId();
         r.email = user.getEmail();
-        r.role = user.getRoles().stream()
-                .map(role -> role.getName())
-                .findFirst()
-                .orElse(null);
+        r.role = user.getRole();
         return r;
     }
 }

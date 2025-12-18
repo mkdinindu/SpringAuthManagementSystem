@@ -2,29 +2,25 @@ package com.practice.usermanagement.service;
 
 import com.practice.usermanagement.dto.LogInRequest;
 import com.practice.usermanagement.dto.RegisterRequest;
-import com.practice.usermanagement.entity.Role;
 import com.practice.usermanagement.entity.User;
-import com.practice.usermanagement.repository.RoleRepository;
 import com.practice.usermanagement.repository.UserRepository;
 import com.practice.usermanagement.security.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-
 @Service
 public class AuthService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+
     private final PasswordEncoder encoder;
     private final JwtService jwtService;
 
     public AuthService(UserRepository userRepository,
-                       RoleRepository roleRepository,
+
                        PasswordEncoder encoder,
                        JwtService jwtService){
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+        
         this.encoder = encoder;
         this.jwtService = jwtService;
     }

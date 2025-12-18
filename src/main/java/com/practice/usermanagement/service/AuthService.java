@@ -30,7 +30,14 @@ public class AuthService {
     }
 
     public void register(RegisterRequest request){
-        Role role = roleRepository.findByName("ROLE_USER")
+        String findTerm = "";
+        if(request.role.equals("USER")){
+            findTerm = "ROLE_USER";
+        }else if(request.role.equals("ADMIN")){
+            findTerm = "ROLE_ADMIN";
+        }
+        System.out.println(findTerm);
+        Role role = roleRepository.findByName(findTerm)
                 .orElseGet(() -> roleRepository.save(new Role(null, "ROLE_USER")));
 
         User user = new User();
